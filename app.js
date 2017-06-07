@@ -1,24 +1,35 @@
 const JeffApp = {
 
-  init(formSelector) {
+  init(selectors) {
     this.max = 0
+    this.list = document.querySelector(selectors.listSelector)
     document
-    .querySelector(formSelector)
+    .querySelector(selectors.formSelector)
     .addEventListener('submit', this.addMovie.bind(this))
   },
 
   addMovie(ev) {
     ev.preventDefault()
-    const f = ev.target
-    const flick = {
+    const m = ev.target
+    const movie = {
       id: this.max + 1,
-      name: f.movieTitle.value,
+      name: m.movieTitle.value,
     }
 
+    const listItem = this.renderListItem(movie)
+    this.list.appendChild(listItem)
+    
     ++ this.max
-    console.log(flick.id)
   },
+
+  renderListItem(movie) {
+    const item = document.createElement('li')
+    item.textContent = movie.name
+    return item
+  }
 
 }
 
-JeffApp.init('#movieForm')
+JeffApp.init({
+  formSelector: '#movie-form',
+  listSelector: '#movie-list'})
