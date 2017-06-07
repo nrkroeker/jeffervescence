@@ -1,0 +1,17 @@
+li {
+  list-style: none;
+  border: 1px solid black;
+  padding: 10px 20px;
+  margin-left: -20px;
+  margin-top: 10px;
+}
+
+.fav {
+  float: right;
+}
+
+h1 {
+  font-family: "Anton", sans-serif;
+  font-size: 5em;
+  text-align: center;
+}
