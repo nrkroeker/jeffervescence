@@ -9,6 +9,28 @@ const JeffApp = {
     .addEventListener('submit', this.addMovie.bind(this))
   },
 
+  favoriteMovie(ev) {
+    // const button = ev.target.parentElement
+    // const li = button.parentElement
+    if(ev.target.getAttribute('src') === 'heart.png') {
+      ev.target.src = 'heart-full.png'
+    } else {
+      ev.target.src = 'heart.png'
+    }
+  },
+
+  deleteMovie(ev) {
+    const button = ev.target.parentElement
+    const li = button.parentElement
+    li.outerHTML = ''
+
+  },
+
+  addListeners(buttons) {
+    buttons[1].addEventListener('click', this.deleteMovie)
+    buttons[2].addEventListener('click', this.favoriteMovie)
+  },
+
   addMovie(ev) {
     ev.preventDefault()
     const m = ev.target
@@ -19,23 +41,28 @@ const JeffApp = {
 
     const listItem = this.renderListItem(movie)
     this.list.appendChild(listItem)
-
     this.movies.push(movie)
 
-    console.log(this.movies)
-
+    const buttons = listItem.childNodes
+    this.addListeners(buttons)
     ++ this.max
+    m.movieTitle.value = ''
   },
 
   renderListItem(movie) {
     const item = document.createElement('li')
     item.textContent = movie.name
+    item.className = movie.id
+    const del = document.createElement('button')
+    del.innerHTML = '<img src="garbage.png" alt="Delete" />'
+    del.className = 'del'
+    item.appendChild(del)
     const fav = document.createElement('button')
-    fav.textContent = "<3"
-    fav.className = "fav"
+    fav.innerHTML = '<img src="heart.png" alt="Favorite" />'
+    fav.className = 'fav'
     item.appendChild(fav)
     return item
-  }
+  },
 
 }
 
