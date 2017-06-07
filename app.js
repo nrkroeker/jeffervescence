@@ -1,14 +1,22 @@
 const JeffApp = {
+
   init(formSelector) {
+    this.max = 0
     document
     .querySelector(formSelector)
-    .addEventListener('submit', this.addMovie)
+    .addEventListener('submit', this.addMovie.bind(this))
   },
 
   addMovie(ev) {
     ev.preventDefault()
-    const flickName = ev.target()
-    console.log('submitted!')
+    const f = ev.target
+    const flick = {
+      id: this.max + 1,
+      name: f.movieTitle.value,
+    }
+
+    ++ this.max
+    console.log(flick.id)
   },
 
 }
