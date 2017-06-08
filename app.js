@@ -10,14 +10,39 @@ const JeffApp = {
   },
 
   // Move list item up
-  moveUp() {
+  moveUp(movie, ev) {
+    ev.preventDefault()
+    const listItem = ev.target.closest('li')
 
+    // Move actual list item
+    this.list.insertBefore(listItem, listItem.previousElementSibling)
+
+    // Change position in array
+    const index = this.movies.findIndex((listItem, i) => {
+      return listItem.id === movie.id
+    })
+
+    const swapMovie = this.movies[index]
+    this.movies[index] = this.movies[index - 1]
+    this.movies[index - 1] = swapMovie
   },
 
   // Move list item down
-  moveDown() {
-    console.log('moved down')
-  },
+  moveDown(movie, ev) {
+    ev.preventDefault()
+    const listItem = ev.target.closest('li')
+
+    // Move actual list item
+    this.list.insertBefore(listItem.nextSibling, listItem)
+
+    // Change position in array
+    const index = this.movies.findIndex((listItem, i) => {
+      return listItem.id === movie.id
+    })
+
+    const swapMovie = this.movies[index]
+    this.movies[index] = this.movies[index + 1]
+    this.movies[index + 1] = swapMovie  },
 
   // Change favorite movie image
   favoriteMovie(ev) {
@@ -58,8 +83,8 @@ const JeffApp = {
     const buttons = listItem.childNodes
     buttons[1].addEventListener('click', this.deleteMovie.bind(this))
     buttons[2].addEventListener('click', this.favoriteMovie.bind(this))
-    buttons[3].addEventListener('click', this.moveDown)
-    buttons[4].addEventListener('click', this.moveUp)
+    buttons[3].addEventListener('click', this.moveDown.bind(this, movie))
+    buttons[4].addEventListener('click', this.moveUp.bind(this, movie))
 
 
     ++ this.max
@@ -72,6 +97,7 @@ const JeffApp = {
     const item = document.createElement('li')
     item.textContent = movie.name
     item.className = movie.id
+    item.dataset.id = movie.id
 
     const del = document.createElement('button')
     del.innerHTML = '<img src="garbage.png" alt="Delete" />'
