@@ -8,7 +8,7 @@ li {
   height: auto;
 }
 
-.fav, .del{
+.fav, .del, .down, .up {
   float: right;
   margin-right: 20px;
   width: 38px;
@@ -16,7 +16,7 @@ li {
 }
 
 h1 {
-  font-family: "Anton", sans-serif;
+  font-family: "Coiny", sans-serif;
   font-size: 5em;
   text-align: center;
   padding-top: 300px;
