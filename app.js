@@ -22,20 +22,24 @@ const JeffApp = {
   deleteMovie(ev) {
     const button = ev.target.parentElement
     const li = button.parentElement
+    const index = li.className
+
+    this.movies.splice(index, 1)
+    console.log(this.movies)
     li.outerHTML = ''
 
   },
 
   addListeners(buttons) {
-    buttons[1].addEventListener('click', this.deleteMovie)
-    buttons[2].addEventListener('click', this.favoriteMovie)
+    buttons[1].addEventListener('click', this.deleteMovie.bind(this))
+    buttons[2].addEventListener('click', this.favoriteMovie.bind(this))
   },
 
   addMovie(ev) {
     ev.preventDefault()
     const m = ev.target
     const movie = {
-      id: this.max + 1,
+      id: this.max,
       name: m.movieTitle.value,
     }
 
@@ -45,7 +49,9 @@ const JeffApp = {
 
     const buttons = listItem.childNodes
     this.addListeners(buttons)
+
     ++ this.max
+
     m.movieTitle.value = ''
   },
 

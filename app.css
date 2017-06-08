@@ -2,7 +2,7 @@ li {
   list-style: none;
   border: 1px solid black;
   font-size: 1.5em;
-  padding: 20px 20px;
+  padding: 20px;
   margin-left: -20px;
   margin-top: 10px;
   height: auto;
@@ -19,4 +19,13 @@ h1 {
   font-family: "Anton", sans-serif;
   font-size: 5em;
   text-align: center;
+}
+
+li:hover {
+  background: #66FFCC
+}
+
+.button.success {
+  background: #006600;
+  color: white;
 }
